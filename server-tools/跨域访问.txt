@@ -1,0 +1,18 @@
+	/***
+     * 判断该请求是否是AJAX请求，当AJAX请求时，允许进行跨域访问，在表头增加跨域表头
+     * @param response
+     * @return
+     */
+    protected HttpServletResponse isAjaxSetHeader(HttpServletRequest request,
+    		HttpServletResponse response) {
+    	// 判断该请求是否是AJAX请求，
+    	String ajaxRequest = request.getHeader("X-Requested-With");
+		if(StringUtils.isNotBlank(ajaxRequest)){
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+			response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+			response.setHeader("X-Powered-By","3.2.1");
+	        response.setHeader("Content-Type", "application/json;charset=utf-8");
+    	}
+        return response;
+	}
